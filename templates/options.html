@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <div>BANK</div>
+        <div>Welcome {{ username['account_first_name'] }}</div>
+        <div>
+            <a class="aLogin" href="{{ url_for('logout')}}"><input type="submit" class="navlogin" value="Log out"></a>
+        </div>
+    </div>
+    <div class="opcont">  
+        <div class="balance">
+            <p>GBP {{ account_balance }}  <span>{{ currency }} {{ value }}</span></p>
+        </div>
+        <div class="exchangediv">
+            <form class="exform" action="{{url_for('currency_exchange')}}" method="post">
+                <label class="label" for="currency">Currency exchange:</label>
+                <select id="currency"  name="currency">
+                    {% for k,v in currencies.items() %}
+                        <option value="{{ k }}">{{ k }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Calculate" class="exchange">
+            </form>
+        </div>
+        <div class="options">
+            <ul class="ul_options">
+                <li><a href="{{url_for('details')}}">Profile</a></li>
+                <li><a href="{{url_for('transactions')}}">View transactions</a></li>
+                <li><a href="{{url_for('withdrawal')}}">Withdrawal</a></li>
+                <li><a href="{{url_for('deposit')}}">Deposit</a></li>
+                <li><a href="{{url_for('update')}}">Update</a></li>
+                <li><a href="{{url_for('delete')}}">Delete account</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

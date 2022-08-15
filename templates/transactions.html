@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="home"><a href="{{ url_for('options')}}">BANK</a></div>
+        <div>
+            <a class="aLogin" href="{{ url_for('logout')}}"><input type="submit" class="navlogin"                                                             value="Log out"></a>
+        </div>
+    </div>
+<div class="transactions">
+    <h1>Transactions</h1>
+    <form action="{{ url_for('select_transactions')}}" method="post" autocomplete="off" class="transactions-form">
+        <input type="date" name="date_from" placeholder="e.g 2022-01-01">
+        <input type="date" name="date_to" placeholder="e.g 2022-01-30">
+        <input type="Submit" class="navlogin" value="Search" >
+    </form>
+    <div class="table">
+        <h5>{{ total_spent }}</h5>
+        <table class="litrans">
+            <tr>
+                <th>Date</th>
+                <th>Income/Outcome</th>
+                <th>Amount</th>
+            </tr>
+            {% for transaction in account %}
+                <tr>
+                    <td>{{ transaction['dot'] }}</td>
+                    <td>{{ transaction['transaction_type'] }}</td>
+                    <td>{{ transaction['transaction_amount'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</body>
+</html>
